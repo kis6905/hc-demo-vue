@@ -11,9 +11,9 @@
           {{ displayPaymentPlan(cardUsageHistory.paymentPlan) }}
         </span>
       </div>
-      <div class="history-item" v-show="isLoading">
-        Loading...
-      </div>
+    </div>
+    <div class="loading" v-show="isLoading">
+      Loading...
     </div>
   </div>
 </template>
@@ -57,7 +57,7 @@ export default {
     },
     handleScroll (event) {
       let el = this.$refs.historyArea
-      if (el.scrollHeight - el.offsetHeight === el.scrollTop) {
+      if ((el.scrollHeight - el.offsetHeight) <= (el.scrollTop + 20)) {
         this.$emit('get-next-card-usage-history-list')
       }
     }
@@ -78,7 +78,7 @@ export default {
 <style scoped lang="less">
 .history-area {
   margin-top: 40px;
-  max-height: 84vh;
+  max-height: 80vh;
   overflow-y: auto;
 
   .history-item {
@@ -96,6 +96,12 @@ export default {
     .color-gray {
       color: #999999;
     }
+  }
+
+  .loading {
+    min-height: 50px;
+    padding: 20px 0 0 0;
+    text-align: center;
   }
 }
 </style>

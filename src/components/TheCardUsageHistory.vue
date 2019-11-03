@@ -14,11 +14,11 @@
       <div class="list-title">
         <div class="area area-left">
           <div class="item">
-            <a href="#" class="order active">최신순</a>
+            <a href="#" class="order active" @click.prevent="handleOrder" data-order="recency">최신순</a>
           </div>
           <div class="item">&nbsp;</div>
           <div class="item">
-            <a href="#" class="order">고액순</a>
+            <a href="#" class="order" @click.prevent="handleOrder" data-order="amount">고액순</a>
           </div>
         </div>
         <div class="area area-right">
@@ -54,7 +54,8 @@ export default {
         endDate: '20191031',
         order: 'recency' // recency: 최신순, amount: 고액순
       },
-      isLoading: true
+      isLoading: false,
+      isRefresh: true
     }
   },
   async created () {
@@ -62,8 +63,10 @@ export default {
   },
   methods: {
     async getCardUsageHistoryList (params) {
-      if (this.isLast) return
       this.isLoading = true
+      if (this.params.pageNo === 1) {
+        this.cardUsageHistoryList = []
+      }
       const cardUsageHistoryInfo = await this.api_getCardUsageHistoryList(params)
       this.cardUsageHistoryList = this.cardUsageHistoryList.concat(cardUsageHistoryInfo.list)
       this.totalAmount = cardUsageHistoryInfo.totalAmount
@@ -71,9 +74,19 @@ export default {
       this.isLoading = false
     },
     getNextCardUsageHistoryList () {
-      if (this.isLoading) return
+      if (this.isLast) return
+      if (this.isLoading) return false
       this.params.pageNo++
       this.getCardUsageHistoryList(this.params)
+    },
+    handleOrder (event) {
+      this.params.order = event.target.dataset.order
+      this.params.pageNo = 1
+      const result = this.getCardUsageHistoryList(this.params)
+      if (result) {
+        document.getElementsByClassName('order active')[0].classList.remove('active')
+        event.target.classList.add('active')
+      }
     }
   },
   computed: {

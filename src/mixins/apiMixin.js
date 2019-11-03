@@ -36,7 +36,6 @@ export default {
           const startNo = (params.pageNo - 1) * 10
           const endNo = (params.pageNo * 10)
           const pageList = resultList.slice(startNo, endNo)
-
           const totalCount = cardUsageHistoryList.length
           const totalAmount = cardUsageHistoryList
                                 .map((e) => e.paymentAmount || 0)
