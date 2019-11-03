@@ -64,8 +64,12 @@ export default {
   },
   watch: {
     isLoading () {
-      console.log('isLoading', this.isLoading)
-      // TODO: scroll 맨 밑으로 이동
+      // 맨 하단으로 스크롤 이동
+      if (this.isLoading) {
+        this.$nextTick(function () {
+          this.$refs.historyArea.scrollTo(0, this.$refs.historyArea.scrollHeight)
+        })
+      }
     }
   }
 }

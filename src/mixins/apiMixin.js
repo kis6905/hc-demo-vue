@@ -1,4 +1,4 @@
-const cardUsageHistoryList_defaultParams = {
+const CARD_USAGE_HISTORY_LIST_DEFAULT_PARAMS = {
   pageNo: 1,
   startDate: '20190901',
   endDate: '20191031',
@@ -7,7 +7,7 @@ const cardUsageHistoryList_defaultParams = {
 
 export default {
   methods: {
-    api_getCardUsageHistoryList (params = cardUsageHistoryList_defaultParams) {
+    api_getCardUsageHistoryList (params = CARD_USAGE_HISTORY_LIST_DEFAULT_PARAMS) {
       if (cardUsageHistoryList.length === 0) {
         cardUsageHistoryList = makeCardUsageHistoryList()
       }
@@ -27,15 +27,14 @@ export default {
                                   }
                                   return dateValue
                                 } else if (params.order === 'amount') {
-                                  return e2.paymentAmount > e1.paymentAmount ? 1: e2.paymentAmount < e1.paymentAmount ? -1 : 0
+                                  return e2.paymentAmount > e1.paymentAmount ? 1 : e2.paymentAmount < e1.paymentAmount ? -1 : 0
                                 } else {
                                   return 0
                                 }
                               })
-          
+
           const startNo = (params.pageNo - 1) * 10
           const endNo = (params.pageNo * 10)
-
           const totalCount = cardUsageHistoryList.length
           const totalAmount = cardUsageHistoryList
                                 .map((e) => e.paymentAmount || 0)
@@ -91,7 +90,7 @@ const makeCardUsageHistoryList = function (size) {
     })
 
     day++
-    if (day == 31) {
+    if (day === 31) {
       day = 1
       month++
     }

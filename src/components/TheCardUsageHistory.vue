@@ -71,8 +71,7 @@ export default {
       this.isLoading = false
     },
     getNextCardUsageHistoryList () {
-      // TODO: lock이 필요할 듯... 어떤 방식으로?
-      console.log('getNextCardUsageHistoryList')
+      if (this.isLoading) return
       this.params.pageNo++
       this.getCardUsageHistoryList(this.params)
     }
