@@ -6,12 +6,12 @@
 
 <script>
 export default {
-  name: 'app',
-  components: {
-  }
+  name: 'app'
 }
 </script>
 
 <style lang="less">
-
+body {
+  margin: 0;
+}
 </style>

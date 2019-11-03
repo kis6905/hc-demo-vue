@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import CardUsageHistory from './views/CardUsageHistory'
+import CardUsageHistory from './components/TheCardUsageHistory'
 
 Vue.use(Router)
 
