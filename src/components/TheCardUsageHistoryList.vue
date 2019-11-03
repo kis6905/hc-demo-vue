@@ -64,9 +64,9 @@ export default {
   },
   watch: {
     isLoading () {
-      // 맨 하단으로 스크롤 이동
       if (this.isLoading) {
         this.$nextTick(function () {
+          // 맨 하단으로 스크롤 이동
           this.$refs.historyArea.scrollTo(0, this.$refs.historyArea.scrollHeight)
         })
       }

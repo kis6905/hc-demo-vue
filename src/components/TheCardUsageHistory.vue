@@ -47,7 +47,7 @@ export default {
     return {
       cardUsageHistoryList: [],
       totalAmount: 0,
-      leaf: false,
+      isLast: false,
       params: {
         pageNo: 1,
         startDate: '20190901',
@@ -62,12 +62,12 @@ export default {
   },
   methods: {
     async getCardUsageHistoryList (params) {
-      if (this.leaf) return
+      if (this.isLast) return
       this.isLoading = true
       const cardUsageHistoryInfo = await this.api_getCardUsageHistoryList(params)
       this.cardUsageHistoryList = this.cardUsageHistoryList.concat(cardUsageHistoryInfo.list)
       this.totalAmount = cardUsageHistoryInfo.totalAmount
-      this.leaf = cardUsageHistoryInfo.leaf
+      this.isLast = cardUsageHistoryInfo.isLast
       this.isLoading = false
     },
     getNextCardUsageHistoryList () {

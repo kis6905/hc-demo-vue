@@ -1,4 +1,4 @@
-const REG_NUMBER_COMMA = /(^[+-]?\d+)(\d{3})/;
+const REG_NUMBER_COMMA = /(^[+-]?\d+)(\d{3})/
 
 export default {
   methods: {
